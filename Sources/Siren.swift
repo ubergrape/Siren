@@ -504,6 +504,9 @@ public extension Siren {
 
         /// Version check performed once a day.
         case daily = 1
+        
+        /// Version check performed every three days.
+        case biweekly = 3
 
         /// Version check performed once a week.
         case weekly = 7
