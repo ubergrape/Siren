@@ -14,33 +14,33 @@ extension Bundle {
     class func bundleID() -> String? {
         return Bundle.main.bundleIdentifier
     }
-
+    
     class func sirenBundlePath() -> String {
-        return Bundle(for: Siren.self).path(forResource: "Siren", ofType: "bundle") as String!
+        return Bundle(for: Siren.self).path(forResource: "Siren", ofType: "bundle")! as String
     }
-
+    
     class func sirenForcedBundlePath(forceLanguageLocalization: Siren.LanguageType) -> String {
         let path = sirenBundlePath()
         let name = forceLanguageLocalization.rawValue
-
+        
         return Bundle(path: path)!.path(forResource: name, ofType: "lproj")!
     }
-
+    
     class func localizedString(forKey key: String, forceLanguageLocalization: Siren.LanguageType?) -> String {
         var path = sirenBundlePath()
         let table = "SirenLocalizable"
-
+        
         if let forceLanguageLocalization = forceLanguageLocalization {
             path = sirenForcedBundlePath(forceLanguageLocalization: forceLanguageLocalization)
         }
-
+        
         return Bundle(path: path)!.localizedString(forKey: key, value: key, table: table)
     }
-
+    
     class func bestMatchingAppName() -> String {
         let bundleDisplayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
         let bundleName = Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String
-
+        
         return bundleDisplayName ?? bundleName ?? ""
     }
 }
